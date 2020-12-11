@@ -6,6 +6,8 @@
 #include <iomanip>
 
 
+#include <iostream>
+
 #include "linux_parser.h"
 
 using std::stof;
@@ -251,11 +253,14 @@ string LinuxParser::User(int pid) {
 long LinuxParser::UpTime(int pid) { 
   std::ifstream stream(kProcDirectory + std::to_string(pid) + kStatFilename);
   string line;
+  string data;
   long time{0};
   if(stream.is_open()) {
-    for(int i = 0; i < 22; i++)
-      std::getline(stream,line);
+    std::getline(stream,line);
     std::istringstream linestream(line);
+    for(int i = 0; i < 21; i++)
+      linestream >> data;    
+    linestream >> time;    
     return time / LinuxParser::Jiffies();
   }
   return time;

@@ -20,8 +20,8 @@ Process::Process(int pid)  : pid_(pid) {
 
 int Process::Pid() { return pid_; }
 
-
-float Process::CpuUtilization() { 
+// Alfonso Balbuena Sanchez
+float Process::CpuUtilization() const { 
     long total_time = LinuxParser::ActiveJiffies(pid_);
     long seconds = UpTime();
     return ((float)(total_time / LinuxParser::Jiffies()) / seconds);
@@ -37,7 +37,7 @@ string Process::Ram() { return LinuxParser::Ram(pid_); }
 string Process::User() { return user_; }
 
 
-long int Process::UpTime() { return LinuxParser::UpTime() - LinuxParser::UpTime(pid_); }
+long int Process::UpTime() const { return LinuxParser::UpTime() - LinuxParser::UpTime(pid_); }
 
 
-bool Process::operator<(Process const& a) const { return  a.pid_ > pid_; }
+bool Process::operator<(Process const& a) const { return  a.CpuUtilization() < CpuUtilization(); }

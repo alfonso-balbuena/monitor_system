@@ -17,6 +17,16 @@ const std::string kMeminfoFilename{"/meminfo"};
 const std::string kVersionFilename{"/version"};
 const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
+
+const std::string kPrettyName("PRETTY_NAME");
+const std::string kCpu("cpu");
+const std::string kProcesses("processes");
+const std::string kProcessRunning("procs_running");
+const std::string kRamProcess("VmData:");
+const std::string kUid("Uid:");
+
+enum ActiveTime { USER = 0, NICE = 1, SYSTEM = 2, IRQ = 5,SOFTIRQ = 6, STEAL = 7};
+enum IdleTime {IDLE = 3, IOWAT = 4};
 // Utils
 float getNumMem(std::ifstream &stream);
 int searchProcStat(std::string attribute);

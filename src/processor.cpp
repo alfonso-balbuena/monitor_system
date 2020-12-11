@@ -17,6 +17,6 @@ float Processor::Utilization() {
     sum_prev_ = sum;
     if(total == 0)
         return 0;
-    return  (float)(total - idled) / (float)total ;
+    return  static_cast<float>(total - idled) / static_cast<float>(total) ;
     
 }
